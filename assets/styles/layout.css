@@ -1,0 +1,116 @@
+@charset "UTF-8";
+/****************************************************************************************************
+ * Datei: assets/styles/layout[.min].css                                                            *
+ * Datum: 2025-02-13 20:07                                                                          *
+ ****************************************************************************************************/
+/* Root */
+:root {
+  --layout-navbar-width: 300px;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+}
+
+/* Layout */
+#layout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas: "h h" "n n" "c c" "f f";
+  position: fixed;
+  inset: 0;
+}
+#layout.layout-mobile, #layout.layout-sidebar {
+  grid-template-areas: "h h" "n c" "n c" "f f";
+}
+
+/* Header (Layout) */
+#header {
+  grid-area: h;
+}
+
+/* Navbtn (Layout) */
+#navbtn {
+  /* empty */
+}
+/* Navbar (Layout) */
+#navbar {
+  grid-area: n;
+  width: var(--layout-navbar-width);
+  height: 100%;
+}
+
+/* Content (Layout) */
+#content {
+  grid-area: c;
+  overflow-y: scroll;
+}
+
+/* Footer (Layout) */
+#footer {
+  grid-area: f;
+}
+
+/* Overlay (Layout) */
+#overlay {
+  grid-area: c;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/*****************************/
+/* START: NUR FÜR DEMOZWECKE */
+/*****************************/
+#header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333333;
+  color: #ffffff;
+}
+
+#navbtn {
+  padding: 0.5rem 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ffffff;
+  background-color: #333333;
+  color: #ffffff;
+}
+#navbtn.active {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+#navbar {
+  padding: 0.5rem 1rem;
+  background-color: #444444;
+  color: #ffffff;
+}
+
+#content {
+  padding: 0.5rem 1rem;
+  background-color: #efefef;
+  color: #212121;
+}
+
+#footer {
+  padding: 0.25rem 1rem;
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/*****************************/
+/* ENDE: NUR FÜR DEMOZWECKE  */
+/*****************************/
