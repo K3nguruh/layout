@@ -1,0 +1,108 @@
+/****************************************************************************************************
+ * Datei: assets/layout.css                                                                         *
+ * Datum: 2025-03-18 15:53                                                                          *
+ ****************************************************************************************************/
+/********************/
+/* Reset            */
+/********************/
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/********************/
+/* Basic            */
+/********************/
+body {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/********************/
+/* Struktur         */
+/********************/
+#layout {
+  position: fixed;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas: "h h" "n c" "n c" "f f";
+}
+#layout.layout-desktop {
+  grid-template-areas: "h h" "n n" "c c" "f f";
+}
+
+#header {
+  grid-area: h;
+}
+
+#navbar {
+  grid-area: n;
+  overflow-y: auto;
+}
+
+#content {
+  grid-area: c;
+  overflow-y: auto;
+}
+
+#footer {
+  grid-area: f;
+}
+
+#overlay {
+  grid-area: c;
+}
+
+/********************/
+/* Theme            */
+/********************/
+#header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #333333;
+  color: #ffffff;
+}
+
+#navbtn {
+  padding: 0.5rem 1rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #ffffff;
+  background-color: #333333;
+  color: #ffffff;
+  cursor: pointer;
+}
+#navbtn.active {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+#navbar {
+  padding: 0.5rem 1rem;
+  background-color: #444444;
+  color: #ffffff;
+}
+
+#content {
+  padding: 0.5rem 1rem;
+  background-color: #efefef;
+  color: #212121;
+}
+
+#footer {
+  padding: 0.25rem 1rem;
+  background-color: #333333;
+  color: #ffffff;
+}
+
+#overlay {
+  background-color: rgba(0, 0, 0, 0.1);
+}
