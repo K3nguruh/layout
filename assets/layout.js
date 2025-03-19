@@ -19,8 +19,8 @@
  *
  *
  * Autor:   K3nguruh <https://github.com/K3nguruh>
- * Version: 1.0.0
- * Datum:   2025-03-18 15:53
+ * Version: 1.0.1
+ * Datum:   2025-03-19
  * Lizenz:  MIT-Lizenz
  */
 (function ($) {
@@ -207,9 +207,9 @@
      *
      * Diese Methode:
      * 1. Fügt die mobile CSS-Klasse hinzu und entfernt andere Layout-Klassen
-     * 2. Konfiguriert den Navigationsbutton für mobile Darstellung
-     * 3. Positioniert die Navigationsleiste absolut mit den korrekten Abmessungen
-     * 4. Blendet das Overlay ein/aus
+     * 2. Zeigt den Navigationsbutton an
+     * 3. Positioniert die Navigationsleiste absolut mit konfigurierten Werten
+     * 4. Positioniert das Overlay absolut und zeigt es je nach Zustand an/aus
      *
      * @private
      * @return {void}
@@ -220,8 +220,8 @@
       this.$layout.removeClass(this.options.classes.sidebar);
 
       this.$navbtn.css({ "display": "" });
-      this.$navbar.css({ "position": "absolute", "inset": "0", "left": this.isShown ? "0" : -this.options.width, "width": this.options.width });
-      this.$overlay.css({ "display": this.isShown ? "" : "none" });
+      this.$navbar.css({ "position": "absolute", "z-index": "1045", "inset": "0", "left": this.isShown ? "0" : -this.options.width, "width": this.options.width });
+      this.$overlay.css({ "position": "absolute", "z-index": "1040", "inset": "0", "display": this.isShown ? "" : "none" });
     },
 
     /**
@@ -229,9 +229,9 @@
      *
      * Diese Methode:
      * 1. Fügt die Desktop CSS-Klasse hinzu und entfernt andere Layout-Klassen
-     * 2. Blendet den Navigationsbutton aus, da er im Desktop-Layout nicht benötigt wird
-     * 3. Setzt die CSS-Eigenschaften der Navigationsleiste auf Standardwerte zurück
-     * 4. Blendet das Overlay aus
+     * 2. Blendet den Navigationsbutton aus
+     * 3. Setzt die CSS-Eigenschaften der Navigationsleiste zurück
+     * 4. Blendet das Overlay aus und setzt dessen CSS-Eigenschaften zurück
      *
      * @private
      * @return {void}
@@ -242,8 +242,8 @@
       this.$layout.removeClass(this.options.classes.sidebar);
 
       this.$navbtn.css({ "display": "none" });
-      this.$navbar.css({ "position": "", "inset": "", "width": "" });
-      this.$overlay.css({ "display": "none" });
+      this.$navbar.css({ "position": "", "z-index": "", "inset": "", "width": "" });
+      this.$overlay.css({ "position": "", "z-index": "", "inset": "", "display": "none" });
     },
 
     /**
@@ -252,9 +252,9 @@
      * Diese Methode:
      * 1. Fügt die Sidebar CSS-Klasse hinzu und entfernt andere Layout-Klassen
      * 2. Blendet den Navigationsbutton aus
-     * 3. Setzt die Positionierungs-Eigenschaften der Navigationsleiste zurück
+     * 3. Setzt die CSS-Eigenschaften der Navigationsleiste zurück
      * 4. Setzt die Breite der Navigationsleiste auf den konfigurierten Wert
-     * 5. Blendet das Overlay aus
+     * 5. Blendet das Overlay aus und setzt dessen CSS-Eigenschaften zurück
      *
      * @private
      * @return {void}
@@ -265,8 +265,8 @@
       this.$layout.removeClass(this.options.classes.mobile);
 
       this.$navbtn.css({ "display": "none" });
-      this.$navbar.css({ "position": "", "inset": "", "width": this.options.width });
-      this.$overlay.css({ "display": "none" });
+      this.$navbar.css({ "position": "", "z-index": "", "inset": "", "width": this.options.width });
+      this.$overlay.css({ "position": "", "z-index": "", "inset": "", "display": "none" });
     },
 
     /**
@@ -315,10 +315,11 @@
       this.$layout.removeClass(this.options.classes.desktop);
       this.$layout.removeClass(this.options.classes.mobile);
       this.$layout.removeClass(this.options.classes.sidebar);
+      this.$navbtn.removeClass(this.options.classes.active);
 
       this.$navbtn.css({ "display": "" });
-      this.$navbar.css({ "position": "", "inset": "", "width": "" });
-      this.$overlay.css({ "display": "" });
+      this.$navbar.css({ "position": "", "z-index": "", "inset": "", "width": "" });
+      this.$overlay.css({ "position": "", "z-index": "", "inset": "", "display": "" });
     },
   });
 
