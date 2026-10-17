@@ -1,0 +1,30 @@
+{
+  "name": "layout",
+  "version": "1.0.0",
+  "description": "Ein leichtgewichtiges Layout-Plugin basierend auf der jQuery UI Widget Factory",
+  "main": "dist/layout.min.js",
+  "style": "dist/layout.min.css",
+  "files": [
+    "dist/",
+    "CHANGELOG.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/K3nguruh/layout.git"
+  },
+  "keywords": [
+    "jquery",
+    "jquery-ui",
+    "widget",
+    "layout",
+    "responsive"
+  ],
+  "author": "K3nguruh <https://github.com/K3nguruh>",
+  "license": "MIT",
+  "peerDependencies": {
+    "jquery": ">=1.7.0",
+    "jquery-ui": ">=1.8.0"
+  }
+}

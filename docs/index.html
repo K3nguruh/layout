@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>layout – Demo</title>
+
+    <!-- Externe Bibliotheken -->
+    <script src="assets/vendor/jquery/4.0.0/jquery.min.js"></script>
+    <script src="assets/vendor/jquery-ui/1.14.2/jquery-ui.min.js"></script>
+
+    <link href="assets/vendor/prismjs/1.30.0/prism.min.css" rel="stylesheet" />
+    <script src="assets/vendor/prismjs/1.30.0/prism.min.js"></script>
+
+    <!-- Plugin Dateien (DEMO) -->
+    <link href="assets/plugin/layout/layout-demo.min.css" rel="stylesheet" />
+    <script src="assets/plugin/layout/layout.min.js"></script>
+
+    <!-- DEMO SCRIPT -->
+    <script>
+      $(function () {
+        const $layout = $("#layout");
+        const $breakpointValue = $("#demo-breakpoint-value");
+        const $sidebarValue = $("#demo-sidebar-value");
+
+        // Breakpoint ändern
+        $("#demo-breakpoint-button").on("click", function (event) {
+          event.preventDefault();
+          const breakpoint = parseInt($breakpointValue.val(), 10);
+
+          $breakpointValue.val(breakpoint);
+          $layout.layout("option", "breakpoint", breakpoint);
+        });
+
+        // Sidebar ändern
+        $("#demo-sidebar-button").on("click", function (event) {
+          event.preventDefault();
+          const isSidebar = $layout.layout("option", "sidebar");
+
+          if (!isSidebar) {
+            $sidebarValue.css("color", "green");
+            $sidebarValue.text("true");
+            $layout.layout("option", "sidebar", true);
+          } else {
+            $sidebarValue.css("color", "red");
+            $sidebarValue.text("false");
+            $layout.layout("option", "sidebar", false);
+          }
+        });
+
+        // Navbar öffnen
+        $("#demo-open-button").on("click", function (event) {
+          event.preventDefault();
+          $layout.layout("open");
+        });
+
+        // Navbar schließen
+        $("#demo-close-button").on("click", function (event) {
+          event.preventDefault();
+          $layout.layout("close");
+        });
+
+        // Navbar umschalten
+        $("#demo-toggle-button").on("click", function (event) {
+          event.preventDefault();
+          $layout.layout("toggle");
+        });
+      });
+    </script>
+  </head>
+
+  <body id="layout" data-plugin="layout">
+    <div id="header">
+      <h1>HEADER</h1>
+      <button id="navbtn">NAVBTN</button>
+    </div>
+
+    <div id="navbar">
+      <h3>NAVBAR</h3>
+    </div>
+
+    <div id="main">
+      <!-- ## layout -->
+      <section>
+        <h1>layout</h1>
+        <div class="badge">
+          <a href="https://github.com/K3nguruh/layout" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/repo-size/K3nguruh/layout" alt="Repository size" />
+          </a>
+          <a href="https://github.com/K3nguruh/layout/issues" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/issues/K3nguruh/layout" alt="Issues" />
+          </a>
+          <a href="https://github.com/K3nguruh/layout/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/license/K3nguruh/layout?branch=main" alt="License" />
+          </a>
+          <a href="https://github.com/K3nguruh/layout/stargazers" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/stars/K3nguruh/layout" alt="GitHub stars" />
+          </a>
+          <a href="https://github.com/K3nguruh/layout/network/members" target="_blank" rel="noopener noreferrer">
+            <img src="https://img.shields.io/github/forks/K3nguruh/layout" alt="GitHub forks" />
+          </a>
+        </div>
+        <div>Das Plugin basiert auf der jQuery UI Widget Factory. Es verwaltet responsive Layout-Zustände und steuert die Sichtbarkeit sowie den Aktivitätsstatus von Navigation, Navigation-Button und Overlay über konfigurierbare CSS-Klassen. Dabei wird die aktuelle Fensterbreite überwacht, um automatisch zwischen einer responsiven Mobile-Ansicht mit aufklappbarer Navigation und einer festen Sidebar- oder Desktop-Darstellung umzuschalten.</div>
+      </section>
+
+      <!-- ## Funktionalitäten -->
+      <section id="funktionalitaeten">
+        <h2>Funktionalitäten</h2>
+        <div>
+          <ul>
+            <li>Automatische Initialisierung über das HTML5-Data-Attribut <code>data-plugin="layout"</code> sowie die Konfiguration über HTML5-Data-Attribute.</li>
+            <li>Dynamische Wechsel zwischen der Mobile-, der Sidebar- und der Desktop-Ansicht basierend auf der Viewport-Breite und der Option <code>sidebar</code>.</li>
+            <li>Performance-optimierte Verarbeitung von Ereignissen zur Fenstergrößenänderung über die <code>requestAnimationFrame</code>-API.</li>
+            <li>Steuerung der Navigation in der Mobile-Ansicht inklusive des Klick-Handlings für den Navigation-Button und das Overlay.</li>
+            <li>Bereitstellung öffentlicher Methoden (<code>open</code>, <code>close</code>, <code>toggle</code>) für den programmatischen Zugriff in der Mobile-Ansicht.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ## Voraussetzungen -->
+      <section id="voraussetzungen">
+        <h2>Voraussetzungen</h2>
+        <div>
+          <ul>
+            <li>jQuery <code>1.7+</code></li>
+            <li>jQuery UI <code>1.8+</code>; vorausgesetzt wird das Widget-Modul: <code>Core</code> → <code>Widget</code></li>
+            <li>Aktuelle Webbrowser mit ES6- und CSS3-Unterstützung</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ## Installation & Einbindung -->
+      <section id="installation-einbindung">
+        <h2>Installation & Einbindung</h2>
+
+        <!-- ### 1. Repository klonen -->
+        <h3>1. Repository klonen</h3>
+        <div>
+          <pre><code class="language-bash">git clone https://github.com/K3nguruh/layout.git</code></pre>
+        </div>
+
+        <!-- ### 2. Dateieinbindung -->
+        <h3>2. Dateieinbindung</h3>
+        <div>Trage die benötigten Scripte und Stylesheets in das HTML-Dokument ein:</div>
+        <div>
+          <pre><code class="language-html">&lt;!-- Externe Bibliotheken --&gt;
+&lt;script src="path/to/jquery.min.js"&gt;&lt;/script&gt;
+&lt;script src="path/to/jquery-ui.min.js"&gt;&lt;/script&gt;
+
+&lt;!-- Plugin Dateien --&gt;
+&lt;link href="path/to/layout.min.css" rel="stylesheet" /&gt;
+&lt;script src="path/to/layout.min.js"&gt;&lt;/script&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ## Anwendung -->
+      <section id="anwendung">
+        <h2>Anwendung</h2>
+
+        <!-- ### Layout-Ansichten -->
+        <h3>Layout-Ansichten</h3>
+        <div>Das Layout wechselt automatisch zwischen drei verschiedenen Ansichten. Die Auswahl erfolgt anhand der aktuellen Viewport-Breite und der Option <code>sidebar</code>.</div>
+        <div>
+          <ul>
+            <li><strong>Mobile:</strong> Die Viewport-Breite liegt unterhalb des definierten <code>breakpoint</code>.</li>
+            <li><strong>Sidebar:</strong> Die Viewport-Breite entspricht mindestens dem <code>breakpoint</code> und <code>sidebar</code> ist <code>true</code>.</li>
+            <li><strong>Desktop:</strong> Die Viewport-Breite entspricht mindestens dem <code>breakpoint</code> und <code>sidebar</code> ist <code>false</code>.</li>
+          </ul>
+        </div>
+
+        <!-- ### Benötigte HTML-Struktur -->
+        <h3>Benötigte HTML-Struktur</h3>
+        <div>Das Plugin benötigt ein Layout-Element sowie Elemente für Navigation, Navigation-Button und Overlay. Die Selektoren für diese Elemente können über die Optionen <code>navbtn</code>, <code>navbar</code> und <code>overlay</code> angepasst werden. Ansonsten werden keine festen CSS-Selektoren für Header, Main und Footer vorgeschrieben. Eine mögliche HTML-Struktur sieht beispielsweise wie folgt aus:</div>
+        <div>
+          <pre><code class="language-html">&lt;body id="layout"&gt;
+  &lt;div id="header"&gt;
+    HEADER
+    &lt;button id="navbtn"&gt;NAVBTN&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id="navbar"&gt;NAVBAR&lt;/div&gt;
+  &lt;div id="main"&gt;MAIN&lt;/div&gt;
+  &lt;div id="footer"&gt;FOOTER&lt;/div&gt;
+  &lt;div id="overlay"&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+          <small>
+            <i>Wird kein <code>overlay</code> benötigt, kann das Element aus dem HTML-Code entfernt werden.</i>
+          </small>
+        </div>
+
+        <!-- ### Automatische Initialisierung (über HTML) -->
+        <h3>Automatische Initialisierung (über HTML)</h3>
+        <div>Jedes Element mit dem Attribut <code>data-plugin="layout"</code> wird beim Laden der Seite automatisch als Plugin initialisiert. Optionen können direkt über <code>data-*</code>-Attribute übergeben werden:</div>
+        <div>
+          <pre><code class="language-html">&lt;!-- Mit Standardoptionen --&gt;
+&lt;body id="layout" data-plugin="layout"&gt;
+  &lt;!-- ... --&gt;
+&lt;/body&gt;
+
+&lt;!-- Mit Benutzerdefinierten Optionen --&gt;
+&lt;body id="layout" data-plugin="layout" data-breakpoint="768" data-sidebar="true"&gt;
+  &lt;!-- ... --&gt;
+&lt;/body&gt;</code></pre>
+        </div>
+
+        <!-- ### Manuelle Initialisierung (über JavaScript) -->
+        <h3>Manuelle Initialisierung (über JavaScript)</h3>
+        <div>Das Plugin kann alternativ direkt über JavaScript initialisiert werden:</div>
+        <div>
+          <pre><code class="language-js">// Mit Standardoptionen
+$(function () {
+  $("#layout").layout();
+});
+
+// Mit Benutzerdefinierten Optionen
+$(function () {
+  $("#layout").layout({
+    breakpoint: 768,
+    sidebar: true,
+  });
+});</code></pre>
+        </div>
+
+        <!-- ### Laufzeitsteuerung & Methodenaufrufe -->
+        <h3>Laufzeitsteuerung & Methodenaufrufe</h3>
+        <div>
+          <pre><code class="language-js">// Aktuelle Werte auslesen
+const breakpoint = $("#layout").layout("option", "breakpoint");
+const isSidebar = $("#layout").layout("option", "sidebar");
+
+// Breakpoint zur Laufzeit ändern
+$("#layout").layout("option", "breakpoint", 768);
+
+// Sidebar-Ansicht zur Laufzeit aktivieren / deaktivieren
+$("#layout").layout("option", "sidebar", true);
+$("#layout").layout("option", "sidebar", false);
+
+// Navigation manuell öffnen / schließen / umschalten
+$("#layout").layout("open");
+$("#layout").layout("close");
+$("#layout").layout("toggle");
+
+// Plugin zerstören und Zustand zurücksetzen
+$("#layout").layout("destroy");</code></pre>
+          <small>
+            <i>Die Methoden <code>open</code>, <code>close</code> und <code>toggle</code> haben nur in der Mobile-Ansicht eine Wirkung.</i>
+          </small>
+        </div>
+      </section>
+
+      <!-- ## Live-Demo -->
+      <section id="live-demo">
+        <h2>Live-Demo</h2>
+        <div>Die Schaltflächen nutzen die öffentliche Plugin-API. Änderungen wirken sich direkt auf das aktive Layout aus. Abhängig von der vorgenommenen Eingabe sollte gegebenenfalls die Größe des Browserfensters angepasst werden, um die Sichtbarkeit zu gewährleisten.</div>
+        <div>
+          <div class="overflow">
+            <table>
+              <thead>
+                <tr>
+                  <th>Aufruf</th>
+                  <th>Beschreibung</th>
+                  <th>Schaltfläche</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <code>
+                      $("#layout").layout("option", "breakpoint",
+                      <input id="demo-breakpoint-value" style="color: blue" type="number" value="1200" min="0" max="9999" step="10" />)
+                    </code>
+                  </td>
+                  <td>Breakpoint zur Laufzeit ändern.</td>
+                  <td>
+                    <button id="demo-breakpoint-button" type="button">Breakpoint ändern</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>$("#layout").layout("option", "sidebar", <span id="demo-sidebar-value" style="color: red">false</span>)</code>
+                  </td>
+                  <td>Sidebar-Ansicht zur Laufzeit aktivieren / deaktivieren.</td>
+                  <td>
+                    <button id="demo-sidebar-button" type="button">Sidebar ändern</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>$("#layout").layout("open")</code>
+                  </td>
+                  <td>Navigation manuell öffnen (nur in der Mobile-Ansicht).</td>
+                  <td>
+                    <button id="demo-open-button" type="button">Navigation öffnen</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>$("#layout").layout("close")</code>
+                  </td>
+                  <td>Navigation manuell schließen (nur in der Mobile-Ansicht).</td>
+                  <td>
+                    <button id="demo-close-button" type="button">Navigation schließen</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code>$("#layout").layout("toggle")</code>
+                  </td>
+                  <td>Navigation manuell umschalten (nur in der Mobile-Ansicht).</td>
+                  <td>
+                    <button id="demo-toggle-button" type="button">Navigation umschalten</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <small><i>Damit die Schaltflächen für die Demonstration klickbar bleiben, wurde das Overlay entfernt.</i></small>
+        </div>
+      </section>
+
+      <!-- ## API-Dokumentation -->
+      <section id="api-dokumentation">
+        <h2>API-Dokumentation</h2>
+
+        <!-- ### Optionen -->
+        <h3>Optionen</h3>
+        <div class="overflow">
+          <table>
+            <thead>
+              <tr>
+                <th>Option</th>
+                <th>Typ</th>
+                <th>Standardwert</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>breakpoint</code></td>
+                <td><code>number</code></td>
+                <td><code>1200</code></td>
+                <td>Viewport-Breite in Pixeln, unterhalb derer die Mobile-Ansicht aktiviert wird.</td>
+              </tr>
+              <tr>
+                <td><code>sidebar</code></td>
+                <td><code>boolean</code></td>
+                <td><code>false</code></td>
+                <td>Aktiviert ab dem Breakpoint die Sidebar-Ansicht anstatt der Desktop-Ansicht.</td>
+              </tr>
+              <tr>
+                <td><code>navbtn</code></td>
+                <td><code>string</code></td>
+                <td><code>#navbtn</code></td>
+                <td>CSS-Selektor für das Navigation-Button-Element.</td>
+              </tr>
+              <tr>
+                <td><code>navbar</code></td>
+                <td><code>string</code></td>
+                <td><code>#navbar</code></td>
+                <td>CSS-Selektor für das Navigation-Element.</td>
+              </tr>
+              <tr>
+                <td><code>overlay</code></td>
+                <td><code>string</code></td>
+                <td><code>#overlay</code></td>
+                <td>CSS-Selektor für das Overlay-Element.</td>
+              </tr>
+              <tr>
+                <td><code>classes</code></td>
+                <td><code>object</code></td>
+                <td>
+                  <small><i>Siehe unten</i></small>
+                </td>
+                <td>Objekt zur Definition der verwendeten CSS-Klassennamen.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ### CSS-Klassen-Konfiguration -->
+        <h3>CSS-Klassen-Konfiguration (<code>classes</code>)</h3>
+        <div class="overflow">
+          <table>
+            <thead>
+              <tr>
+                <th>Eigenschaft</th>
+                <th>Typ</th>
+                <th>Standardwert</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>layout</code></td>
+                <td><code>string</code></td>
+                <td><code>"layout"</code></td>
+                <td>Basis-Klasse für das Layout-Element.</td>
+              </tr>
+              <tr>
+                <td><code>layoutMobile</code></td>
+                <td><code>string</code></td>
+                <td><code>"layout-mobile"</code></td>
+                <td>Wird in der Mobile-Ansicht dem Layout-Element zugewiesen.</td>
+              </tr>
+              <tr>
+                <td><code>layoutSidebar</code></td>
+                <td><code>string</code></td>
+                <td><code>"layout-sidebar"</code></td>
+                <td>Wird in der Sidebar-Ansicht dem Layout-Element zugewiesen.</td>
+              </tr>
+              <tr>
+                <td><code>layoutDesktop</code></td>
+                <td><code>string</code></td>
+                <td><code>"layout-desktop"</code></td>
+                <td>Wird in der Desktop-Ansicht dem Layout-Element zugewiesen.</td>
+              </tr>
+              <tr>
+                <td><code>stateAnimated</code></td>
+                <td><code>string</code></td>
+                <td><code>"is-animated"</code></td>
+                <td>Wird für die CSS-Übergänge dem Layout-Element zugewiesen.</td>
+              </tr>
+              <tr>
+                <td><code>stateCollapsed</code></td>
+                <td><code>string</code></td>
+                <td><code>"is-collapsed"</code></td>
+                <td>Wird bei geschlossener Navigation dem Layout-Element zugewiesen.</td>
+              </tr>
+              <tr>
+                <td><code>stateExpanded</code></td>
+                <td><code>string</code></td>
+                <td><code>"is-expanded"</code></td>
+                <td>Wird bei geöffneter Navigation dem Layout-Element zugewiesen.</td>
+              </tr>
+              <tr>
+                <td><code>stateActive</code></td>
+                <td><code>string</code></td>
+                <td><code>"active"</code></td>
+                <td>Wird bei geöffneter Navigation dem Navigation-Button-Element zugewiesen.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>Die CSS-Klassennamen können individuell angepasst werden:</div>
+        <div>
+          <pre><code class="language-js">$("#layout").layout(&#123;
+  classes: &#123;
+    layout: "my-layout",
+    layoutMobile: "my-layout-mobile",
+    layoutSidebar: "my-layout-sidebar",
+    layoutDesktop: "my-layout-desktop",
+    stateAnimated: "my-is-animated",
+    stateCollapsed: "my-is-collapsed",
+    stateExpanded: "my-is-expanded",
+    stateActive: "my-active",
+  &#125;,
+&#125;);</code></pre>
+          <small><i>Die entsprechenden CSS-Selektoren müssen bei Verwendung eigener CSS-Klassennamen ebenfalls angepasst werden.</i></small>
+        </div>
+
+        <!-- ### Öffentliche Methoden -->
+        <h3>Öffentliche Methoden</h3>
+        <div class="overflow">
+          <table>
+            <thead>
+              <tr>
+                <th>Methode</th>
+                <th>Aufruf</th>
+                <th>Parameter</th>
+                <th>Beschreibung</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>option</code></td>
+                <td><code>layout("option", key, [value])</code></td>
+                <td><code>string</code>, <code>[any]</code></td>
+                <td>Liest oder setzt die Optionen <code>breakpoint</code> und <code>sidebar</code> zur Laufzeit.</td>
+              </tr>
+              <tr>
+                <td><code>open</code></td>
+                <td><code>layout("open")</code></td>
+                <td>
+                  <small><i>keine</i></small>
+                </td>
+                <td>Öffnet die Navigation in der Mobile-Ansicht, sofern sie geschlossen ist.</td>
+              </tr>
+              <tr>
+                <td><code>close</code></td>
+                <td><code>layout("close")</code></td>
+                <td>
+                  <small><i>keine</i></small>
+                </td>
+                <td>Schließt die Navigation in der Mobile-Ansicht, sofern sie geöffnet ist.</td>
+              </tr>
+              <tr>
+                <td><code>toggle</code></td>
+                <td><code>layout("toggle")</code></td>
+                <td>
+                  <small><i>keine</i></small>
+                </td>
+                <td>Öffnet / Schließt die Navigation in der Mobile-Ansicht.</td>
+              </tr>
+              <tr>
+                <td><code>destroy</code></td>
+                <td><code>layout("destroy")</code></td>
+                <td>
+                  <small><i>keine</i></small>
+                </td>
+                <td>Zerstört das Plugin und stellt den ursprünglichen DOM-Zustand wieder her.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ## Support -->
+      <section id="support">
+        <h2>Support</h2>
+        <div>
+          Fehler, Verbesserungsvorschläge und Fragen können über den
+          <a href="https://github.com/K3nguruh/layout/issues" target="_blank" rel="noopener noreferrer">GitHub Issue Tracker</a> eingereicht werden.
+        </div>
+      </section>
+
+      <!-- ## Lizenz -->
+      <section id="lizenz">
+        <h2>Lizenz</h2>
+        <div>
+          Dieses Projekt steht unter der
+          <a href="https://github.com/K3nguruh/layout/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT-Lizenz</a>.
+        </div>
+      </section>
+    </div>
+
+    <div id="footer">
+      <h4>FOOTER</h4>
+    </div>
+
+    <!--<div id="overlay"></div>-->
+  </body>
+</html>

@@ -1,0 +1,75 @@
+/* === LAYOUT: CORE === */
+#layout {
+  position: fixed;
+  inset: 0;
+}
+#layout.layout, #layout.layout-desktop {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto 1fr auto;
+  grid-template-areas: "h h" "n n" "m m" "f f";
+}
+#layout.layout-sidebar, #layout.layout-mobile {
+  grid-template-areas: "h h" "n m" "n m" "f f";
+}
+
+#header {
+  grid-area: h;
+}
+
+#navbtn {
+  transition: all 300ms ease-in-out;
+}
+
+#navbar {
+  grid-area: n;
+}
+#layout.layout-sidebar #navbar, #layout.layout-mobile #navbar {
+  width: 300px;
+  overflow: hidden auto;
+}
+#layout.layout-mobile #navbar {
+  position: absolute;
+  z-index: 1045;
+  inset: 0;
+}
+#layout.is-collapsed #navbar {
+  transform: translateX(-100%);
+  visibility: hidden;
+}
+#layout.is-expanded #navbar {
+  transform: translateX(0);
+  visibility: visible;
+}
+#layout.is-animated #navbar {
+  transition: transform 300ms ease-in-out, visibility 300ms ease-in-out;
+}
+
+#main {
+  grid-area: m;
+  overflow: hidden auto;
+}
+
+#footer {
+  grid-area: f;
+}
+
+#overlay {
+  grid-area: m;
+}
+#layout.layout-mobile #overlay {
+  position: absolute;
+  z-index: 1040;
+  inset: 0;
+}
+#layout.is-collapsed #overlay {
+  opacity: 0;
+  visibility: hidden;
+}
+#layout.is-expanded #overlay {
+  opacity: 1;
+  visibility: visible;
+}
+#layout.is-animated #overlay {
+  transition: opacity 300ms ease-in-out, visibility 300ms ease-in-out;
+}
